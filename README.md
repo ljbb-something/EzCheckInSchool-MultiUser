@@ -1,7 +1,7 @@
 # EzCheckInSchool-MultiUser
  
 修改自[chillsoul的EzCheckInSchool](https://github.com/chillsoul/EzCheckInSchool)
-
+ 
 功能与使用方法均与其相同
 
 唯一的不同之处在于此版本可同时为多个成员打卡
