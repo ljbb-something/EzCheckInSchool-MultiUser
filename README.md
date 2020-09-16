@@ -29,13 +29,15 @@
 ## 使用方法
 首先，点击页面上方`Star`并`Fork`，此时你将得到复制的项目
 
-![QRcode](http://wxpusher.zjiecode.com/api/qrcode/1men6ZnAtqckyldYHDbYfOKSsqcxxhXtu6nXChdP9iybdir048fJ1VxU0W5Kwlgo.jpg)
+点击此链接获取二维码
+
+[QRcode](http://wxpusher.zjiecode.com/api/qrcode/1men6ZnAtqckyldYHDbYfOKSsqcxxhXtu6nXChdP9iybdir048fJ1VxU0W5Kwlgo.jpg)
 
 每个用户都需要扫描此二维码关注新消息服务公众号
 
 然后依次点击`我的`->`我的UID`，获取每个用户的UID
 
-接下来你需要设置`Secert` Fork的项目->Settings->Secert->New Secert
+接下来你需要设置`Secert`添加以下四项内容 Fork的项目->Settings->Secert->New Secert
 
 打开完美校园健康打卡，参照打卡页面上方个人信息及如下表格设置
 
