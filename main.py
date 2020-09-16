@@ -14,20 +14,18 @@ with open('./response.json', 'r', encoding='utf8')as fp:
 stu_names = input().split(',')
 stu_ids = input().split(',')
 dept_texts = input().split(',')
-
-sc_url = input()
+uids = input().split(',')
 
 
 def main():
     """
     主函数
     """
-    content = ''
     for j in range(len(dept_texts)):
         stu_name = stu_names[j]
         stu_id = stu_ids[j]
         dept_text = dept_texts[j]
-
+        uid = uids[j]
         # 获取学院、专业和班级信息
         try:
             info = dept_text.split('-', 3)
@@ -117,7 +115,6 @@ def main():
 
         # 提交打卡与结果判定
         flag = 0
-        flag2 = 0
         for i in range(1, 5):
             print('成员{0}第{1}次尝试打卡中...'.format(j+1, i))
             response = requests.post(check_url, json=check_json)
@@ -134,31 +131,28 @@ def main():
                 msg = time_msg + '时' + stu_name + "打卡成功"
             else:
                 msg = time_msg + "打卡异常"
-                flag2 = 1
         else:
             msg = time_msg + "网络错误打卡失败"
-            flag2 = 1
 
         print(msg)
-        content += msg + "  \n"
         # 微信通知
-        if flag2 == 1:
-            title = "打卡异常，存在打卡失败情况，请手动打卡"
-        else:
-            title = "全部成员打卡成功"
+        wechat_push(uid, msg)
 
-    wechat_push(sc_url, title, content)
 
-def wechat_push(sc_url, title, content):
-    data = {
-        "text": title,
-        "desp": content
+def wechat_push(uid, msg):
+    json = {
+        "appToken": "AT_hHtOWzcFDw3nhEWfhLNJgnNDAO132pFK",
+        "content": msg,
+        "contentType": 1,
+        "uids": [
+            uid
+        ]
     }
-    response = requests.post(sc_url, data=data)
+    response = requests.post("http://wxpusher.zjiecode.com/api/send/message", json=json)
     if response.status_code == 200:
-        print('Server酱推送成功!')
+        print('微信推送成功!')
     else:
-        print('Server酱推送失败!')
+        print('微信推送失败!')
 
 
 def print_info_error():

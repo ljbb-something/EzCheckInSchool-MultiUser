@@ -20,6 +20,8 @@
 
 ## 更新日志
 
+2020.9.16  更换微信推送使用的api，不再需要github账户绑定server酱，并且可以想每个用户单独推送其打卡状态
+
 2020.9.15  更新微信推送，现在所有人的打卡信息只会发送一条推送信息
 
 2020.9.14  第一版发布，对应chillsoul的版本9.12更新
@@ -27,24 +29,30 @@
 ## 使用方法
 首先，点击页面上方`Star`并`Fork`，此时你将得到复制的项目
 
-使用Github登入[Server酱](http://sc.ftqq.com/)并微信绑定以便可以收到结果推送
+![QRcode](http://wxpusher.zjiecode.com/api/qrcode/1men6ZnAtqckyldYHDbYfOKSsqcxxhXtu6nXChdP9iybdir048fJ1VxU0W5Kwlgo.jpg)
+
+每个用户都需要扫描此二维码关注新消息服务公众号
+
+然后依次点击`我的`->`我的UID`，获取每个用户的UID
 
 接下来你需要设置`Secert` Fork的项目->Settings->Secert->New Secert
 
 打开完美校园健康打卡，参照打卡页面上方个人信息及如下表格设置
 
-这一步与正常版本不同，除SC_URL以外，每项secert可以添加多个信息
+这一步与原版本不同，每项secert可以添加多个信息
 
 中间使用半角逗号分隔
 
 个数不限
+
+要注意每项数据的顺序需要一一对应
 
 |Name|Value|示例|
 | :-----| :---- | :---- |
 |`DEPT_TEXT`|`学院-专业-班级`|`理学院-应用物理学-应物1901,理学院-应用物理学-应物1901`|
 |`STU_ID`|`学号`|`201912340101,201912340101`|
 |`STU_NAME`|`姓名`|`张三,李四`|
-|`SC_URL`|[`Server酱调用URL`](http://sc.ftqq.com/?c=code)|`http://sc.ftqq.com/abcdefghigklmnopqrstuvwxyz.send`| 
+|`UID`|`公众号获取的UID`|`UID_abcdefghijklmnopqrstuvwxyz,UID_abcdefghijklmnopqrstuvwxyz`| 
 
 以上步骤完成后
 
