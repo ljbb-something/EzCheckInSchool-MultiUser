@@ -29,8 +29,5 @@ jobs:
     - name: AutoCheck
       run: |
         python3 main.py <<EOF
-        ${{secrets.STU_NAME}}
-        ${{secrets.STU_ID}}
-        ${{secrets.DEPT_TEXT}}
-        ${{secrets.UID}}
+        ${{secrets.USERS}}
         EOF
