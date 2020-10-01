@@ -5,7 +5,7 @@ import requests
 import re
 
 # 获取response.json dict
-with open('./response.json', 'r', encoding='utf8')as fp:
+with open('./response.json', 'r', encoding='utf8') as fp:
     response_json = json.load(fp)
     college_all = response_json['data']['collegeAll']
     major_all = response_json['data']['majorAll']
@@ -25,22 +25,6 @@ error = []
 
 
 def main():
-    # 获取打卡时间信息
-    now = get_time()
-    if (now[0] >= 6) & (now[0] < 8):
-        template_id = "clockSign1"
-        customer_app_type_rule_id = 146
-    elif (now[0] >= 12) & (now[0] < 14):
-        template_id = "clockSign2"
-        customer_app_type_rule_id = 147
-    elif (now[0] >= 21) & (now[0] < 22):
-        template_id = "clockSign3"
-        customer_app_type_rule_id = 148
-    else:
-        print('未到打卡时间，将重打早间卡测试')
-        template_id = "clockSign1"
-        customer_app_type_rule_id = 146
-
     # 遍历所有需要打卡的成员
     for stu in stus:
         # 获取dept_text以及uid
@@ -74,12 +58,10 @@ def main():
         except NameError:
             print_info_error()
             exit(1)
-        stu.append(template_id)
-        stu.append(customer_app_type_rule_id)
         msg = check(stu)
         print(msg)
         wechat_push(uid, msg)
-    # 当error list不为空时一直循环打卡 知道清空error
+    # 当error list不为空时一直循环打卡 直到清空error
     while len(error) != 0:
         # 等待5min
         time.sleep(300)
@@ -133,8 +115,6 @@ def check(stu):
     stu_id = stu[1]
     dept_text = stu[2]
     class_id = stu[4]
-    template_id = stu[5]
-    customer_app_type_rule_id = stu[6]
     now = get_time()
     check_json = {
         "businessType": "epmpics",
@@ -154,7 +134,7 @@ def check(stu):
             "customerid": 43,
             "deptid": class_id,
             "source": "app",
-            "templateid": template_id,
+            "templateid": "clockSign2",
             "stuNo": stu_id,
             "username": stu_name,
             "userid": round(time.time()),
@@ -168,7 +148,7 @@ def check(stu):
                     "value": "无症状"
                 }
             ],
-            "customerAppTypeRuleId": customer_app_type_rule_id,
+            "customerAppTypeRuleId": 147,
             "clockState": 0
         },
     }
